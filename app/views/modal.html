@@ -1,0 +1,19 @@
+<div modal="showModal" close="cancel()">
+    <div class="modal-header">
+        <h4>Modal Dialog</h4>
+    </div>
+    <div class="modal-body">
+        <h3>Your Submission</h3>
+        <p>Name: {{clName}}</p>
+        <p>Company: {{clComp}}</p>
+        <p>Email: {{clEmail}}</p>
+        <p>Phone: {{clTel}}</p>
+        <p>I want to have similar structure of website: {{clStructure}}</p>
+        <p>Secondary color is: {{clColor2}}</p>
+        <p>I need stock pictures: {{clPicsStock}}</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" ng-click="ok()">Okay</button>
+      <button class="btn" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

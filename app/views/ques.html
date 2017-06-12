@@ -1,0 +1,271 @@
+<div class="container" ng-controller="QuesCtrl as que">
+  <fieldset>
+    <legend><h1 class="text-center white"> Website Order Questionaire</h1></legend>
+<form class="form-horizontal well"  name="quesForm" novalidate ng-submit="processForm()">
+<div class="form-group row" ng-class="{'has-error' : quesForm.clName.$invalid && !quesForm.clName.$pristine}">
+  <label for="cl-name" class="col-sm-2">Name</label>
+  <div class="col-sm-8">
+    <input class="form-control" type="text" name="clName" placeholder="Name" ng-model="formData.clName" required>
+    <span ng-show="quesForm.clName.$invalid && !quesForm.clName.$pristine" class="help-block">Your name is required.</span>
+  </div>
+</div>
+  <div class="form-group row">
+  <label for="cl-comp" class="col-sm-2 ">Organization/Company</label>
+  <div class="col-sm-8">
+    <input class="form-control" type="text" name="clComp" placeholder="Organization or Company name" id="cl-comp" ng-model="formData.clComp">
+  </div>
+</div>
+<div class="form-group row" ng-class="{'has-error' : quesForm.clEmail.$invalid && !quesForm.clEmail.$pristine}">
+  <label for="cl-email" class="col-sm-2 ">Email</label>
+  <div class="col-sm-8">
+    <input class="form-control" type="email" name="clEmail" placeholder="yourname@yourdomain.com" id="cl-email" ng-model="formData.clEmail" required>
+    <span ng-show="quesForm.clEmail.$invalid && !quesForm.clEmail.$pristine" class="help-block">Enter a valid email address</span>
+  </div>
+</div>
+<div class="form-group row" ng-class="{'has-error' : quesForm.clTel.$invalid && !quesForm.clTel.$pristine}">
+  <label for="cl-tel" class="col-sm-2 ">Telephone</label>
+  <div class="col-sm-8">
+    <input class="form-control" type="tel" name="clTel" pattern="(\d{3})-(\d{3})-(\d{4})" placeholder="(555)-555-5555" id="cl-tel" required ng-model="formData.clTel">
+    <span ng-show="quesForm.clTel.$invalid && !quesForm.clTel.$pristine" class="help-block">Enter a valid phone number in format XXX-XXX-XXXX</span>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="cl-text-wname" class="col-sm-2 ">What is the current name of your website?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="website name or desired website name" id="cl-text-wname" ng-model="formData.clTextWname"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="cl-text-goals" class="col-sm-2 ">What is the purpose of your website?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Please give short description of the website purpose" id="cl-text-goals" ng-model="formData.clTextGoals"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="cl-text-tag" class="col-sm-2 ">Do you have a statement or tagline that you want to include?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Please provide a tagline" id="cl-text-tag" ng-model="formData.clTextTag"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="cl-text-vis" class="col-sm-2 ">What is your audience?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Describe the visitors of your website" id="cl-text-vis" ng-model="formData.clTextVis"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="cl-text-prod" class="col-sm-2 ">What services or products do you offer?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Please describe what will you offer on website" id="cl-text-prod" ng-model="formData.clTextProd"></textarea>
+  </div>
+</div>
+<div class="form-group row" ng-class="{'has-error' : (!quesForm.$pristine  || quesForm.clSelectCat.$touched) && quesForm.clSelectCat.$invalid}">
+  <label for="cl-select-cat" class="col-sm-2 ">Select the category that best describes goals for this website</label>
+  <div class="col-sm-8">
+    <select class="form-control" id="cl-select-cat" name="clSelectCat" ng-model="formData.clSelectCat"  ng-options="cat.name for cat in cats" required></select>
+    <span ng-show="!quesForm.$pristine && quesForm.clSelectCat.$invalid" class="help-block">Please select an option from dropdown</span>
+  </div>
+</div>
+<div class="form-group row">
+<label for="cl-select-have-website" class="col-sm-2 ">Do you already have a website?</label>
+  <label class="radio-inline col-sm-4" for="cl-options-radio1">
+    <input type="radio" name="website" id="cl-options-radio1" value="option1" ng-model="formData.website">
+    I already have a website
+  </label>
+  <label class="radio-inline col-sm-4" for="cl-options-radio2">
+    <input type="radio" name="website" id="cl-options-radio2" value="option2" ng-model="formData.website">
+    I do not have a website
+  </label>
+</div>
+
+<div class="form-group row" ng-show="formData.website == 'option1'" >
+  <label for="cl-url" class="col-sm-2 ">Enter the name of your website</label>
+  <div class="col-sm-8">
+    <input class="form-control" type="url" value="http://www.mywebsite.com" id="cl-url" ng-model="formData.clWebNameOld">
+  </div>
+</div>
+
+<div class="form-group row" ng-show="formData.website =='option1'">
+<label for="cl-select-structure" class="col-sm-2 ">Do you want to have similar structure for your website?</label>
+  <label class="radio-inline col-sm-4" for="cl-structure-radio1">
+    <input type="radio" name="clStructure" id="cl-structure-radio1" ng-model="formData.clStructure" value="yes">
+    Yes
+  </label>
+  <label class="radio-inline col-sm-4" for="cl-structure-radio2">
+    <input type="radio" name="clStructure" id="cl-structure-radio2" ng-model="formData.clStructure" value="no">
+    No
+  </label>
+</div>
+
+<div class="form-group row" ng-show="formData.website == 'option2'">
+  <label for="cl-new-url" class="col-sm-2 ">Enter the desired name for your website</label>
+  <div class="col-sm-8">
+    <input class="form-control" type="url" value="http://www.mynewwebsite.com" id="cl-new-url" ng-model="formData.clNewUrl">
+  </div>
+</div>
+
+<div class="form-group row" ng-show="formData.clStructure =='no' || formData.website =='option2'">
+  <label for="cl-text-links" class="col-sm-2 ">What main section/links do you want to have?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Please put the name for main links (Home, Contacts, About us, Shop, Blogs, etc.)" id="cl-text-links" ng-model="formData.clLinks"></textarea>
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="cl-color1" class="col-sm-2 ">What will be your main color of the website?</label>
+  <div class="col-sm-2">
+    <input type="color" name="favcolor1"  id="cl-color1" ng-model="formData.clColor1">
+  </div>
+<label for="cl-color2" class="col-sm-2">What will be your second color of the website?</label>
+  <div class="col-sm-2">
+    <input type="color" name="favcolor2"  id="cl-color2" ng-model="formData.clColor2">
+
+  </div>
+  <label for="cl-color3" class="col-sm-2">What will be your third color of the website?</label>
+  <div class="col-sm-2">
+    <input type="color" name="favcolor3"  id="cl-color3" ng-model="formData.clColor3">
+
+  </div>
+  </div>
+
+  <div class="form-group row">
+  <label for="cl-text-look1" class="col-sm-2 ">Are there any website that look like your desired website?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Please write the name of website" id="cl-text-look1" ng-model="formData.clLook1"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="cl-text-look2" class="col-sm-2 ">Do you like the way any website works?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Please write the name of website" id="cl-text-look2" ng-model="formData.clLook2"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="cl-text-look3" class="col-sm-2 ">Are there websites that you consider your competitors?</label>
+
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Please write the name of website" id="cl-text-look3" ng-model="formData.clLook3"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+    <label for="cl-select-elements" class="col-sm-2 ">What elements do you want to have on your home page?</label>
+    <div class="col-sm-10">
+        <div class="row">
+            <label ng-repeat="el in elems1 track by $index" class="col-sm-3">
+                <input type="checkbox" ng-model="el.selected"  ng-true-value="'{{el.name}}'" ng-false-value="''">{{el.name}}
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+<label for="cl-select-picture" class="col-sm-2 ">Do you have high quality images you want to use for yor website?</label>
+  <label class="radio-inline col-sm-4" for="cl-pic-yes" >
+    <input type="radio" name="images" id="cl-pic-yes" value="yes" ng-model="formData.pics">
+    Yes
+  </label>
+  <label class="radio-inline col-sm-4" for="cl-pic-no">
+    <input type="radio" name="images" id="cl-pic-no" value="no" ng-model="formData.pics">
+    No
+  </label>
+</div>
+
+<div class="form-group row" ng-show="formData.pics =='no'">
+<label for="cl-select-structure" class="col-sm-2 ">Do you want us to help you find good stock photos (for additional cost)?</label>
+  <label class="radio-inline col-sm-4" for="cl-pics-radio1">
+    <input type="radio" name="pics" id="cl-pics-radio1" value="yes" ng-model="formData.clPicsStock">
+    Yes
+  </label>
+  <label class="radio-inline col-sm-4" for="cl-pics-radio2">
+    <input type="radio" name="pics" id="cl-pics-radio2" value="no" ng-model="formData.clPicsStock">
+    No
+  </label>
+</div>
+
+<div class="form-group row">
+  <label for="cl-text-special" class="col-sm-2 ">Do you need any special functionality?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Any special functionality" id="cl-text-special" ng-model="formData.clSpecialFunc"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="cl-text-add" class="col-sm-2 ">Anything else you want to add?</label>
+  <div class="col-sm-8">
+    <textarea class="form-control" rows="3" placeholder="Additional comments" id="cl-text-add" ng-model="formData.clAddInfo"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="cl-name" class="col-sm-2">We work with humans, aliens and robots, but please type answer for "2 + 2".</label>
+  <div class="col-sm-2">
+    <input class="form-control" type="text" value="answer" id="cl-check-human" ng-model="humanInput">
+  </div>
+</div>
+ <button type="button" ng-disabled="quesForm.$invalid" class="btn btn-default btn-lg"  data-toggle="modal" ng-click="checkForm();" data-target="#myModal">Check info</button>
+</form>
+</fieldset>
+<!--ng-disabled="quesForm.$invalid" data-toggle="modal" ng-click="checkForm();" data-target="#myModal"-->
+<div class="well" ng-show="!quesForm.$pristine">
+    <div class="row">
+      <div class="col-sm-8">
+        <h3>Your Submission</h3>
+        <p>Name: {{formData.clName}}</p>
+        <p>Company: {{formData.clComp}}</p>
+        <p>Email: {{formData.clEmail}}</p>
+        <p>Phone: {{formData.clTel}}</p>
+        <p>Selection: {{formData.clSelectCat}}</p>
+        <p>What elements do you want to have: {{formData.list}}</p>
+        <p>Answer: {{humanInput}}</p>
+      </div>
+      
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Your submission</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Your Submission</h3>
+        <p>Name: {{formData.clName}}</p>
+        <p>Company: {{formData.clComp}}</p>
+        <p>Email: {{formData.clEmail}}</p>
+        <p>Phone: {{formData.clTel}}</p>
+        <p>Current website name: {{formData.clTextWname}}</p>
+        <p>Website goals: {{formData.clTextGoals}}</p>
+        <p>Website tagline: {{formData.clTextTag}}</p>
+        <p>Describe visitors of your website: {{formData.clTextVis}}</p>
+        <p>Services offered on website: {{formData.clTextProd}}</p>
+        <p>Website category: {{formData.clSelectCat}}</p>
+        <p>I already have a website: {{formData.website}}</p>
+        <p>Old website name: {{formData.clWebNameOld}}</p>
+        <p>I want to have similar structure of website: {{formData.clStructure}}</p>
+        <p>New website name: {{formData.clNewUrl}}</p>
+        <p>Links on the home page: {{formData.clLinks}}</p>
+        <p>Primary color is: {{formData.clColor1}}</p>
+        <p>Secondary color is: {{formData.clColor2}}</p>
+        <p>Third color is: {{formData.clColor3}}</p>
+        <p>Website that I like how they look: {{formData.clLook1}}</p>
+        <p>Website that I like how they work: {{formData.clLook2}}</p>
+        <p>Website that are competitors: {{formData.clLook3}}</p>
+        <p>Elements on home page: {{formData.list}}</p>
+        <p>I have high quality pictures: {{formData.pics}}</p>
+        <p>I need stock pictures: {{formData.clPicsStock}}</p>
+        <p>I need additional functionality: {{formData.clSpecialFunc}}</p>
+        <p>Additionally i want add: {{formData.clAddInfo}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Return to edit</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="quesForm.$invalid" ng-click="processForm();">Submit Questionaire</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+</div>

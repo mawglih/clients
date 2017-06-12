@@ -1,0 +1,21 @@
+<div class="jumbotron">
+  <h1>Welcome to Clients' Area</h1>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 hidden-xs">
+      <div class="list-group">
+        <a ui-sref="ques" class="list-group-item list-group-item-action" id="cl-view1" ng-mouseenter="showPic1=true;" ng-mouseleave="showPic1=false;">Questionaire</a>
+        <a ui-sref="start" class="list-group-item list-group-item-action" id="cl-view2" ng-mouseenter="showPic2=true;" ng-mouseleave="showPic2=false;">Getting Started</a>
+        <a ui-sref="res" class="list-group-item list-group-item-action" id="cl-view3" ng-mouseenter="showPic3=true;" ng-mouseleave="showPic3=false;">Work Samples</a>
+      </div>
+    </div>
+    <div class="col-sm-7 col-sm-offset-2" id="cl-view-display">
+      <h2 class="text-center well" ng-hide="showPic1 || showPic2 || showPic3">Please select your destination on the left</h2>
+      <img src="images/ques.jpg" class="img-fluid img-responsive center-block img-thumbnail" alt="image1" ng-show="showPic1">
+      <img src="images/start.jpg" class="img-fluid img-responsive center-block img-thumbnail" alt="image2" ng-show="showPic2">
+      <img src="images/res.jpg" class="img-fluid img-responsive center-block img-thumbnail" alt="image3" ng-show="showPic3">
+    </div>
+    </div>
+  </div>
+</div>
